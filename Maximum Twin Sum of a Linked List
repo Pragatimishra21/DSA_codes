@@ -1,0 +1,27 @@
+int pairSum(ListNode* head) {
+     ListNode *s(head), *f(head);
+        int n=0;
+
+        while(f){
+            f=f->next->next;
+            s=s->next;
+            n++;
+        }
+        ListNode *pre(NULL);
+        while(s){
+            f=s->next;
+            s->next=pre;
+            pre=s;
+            s=f;
+        }
+        //reassigning the value to fast pointer
+        f=head;
+        int ma=0;
+        while(n--){
+            ma=max(ma,(f->val+pre->val));
+            f=f->next;
+            pre=pre->next;
+        }
+        return ma;
+    }
+};
