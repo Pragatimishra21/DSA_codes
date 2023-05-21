@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxPathSum(Node* root) {
+        int maxi = INT_MIN;
+        int res = findPath(root, maxi);
+        if(root->left == nullptr || root->right == nullptr) return max(maxi, res);
+        return maxi;
+    }
+    
+    int findPath(Node* node, int &maxi) {
+        if(node == NULL) return 0;
+        int left = findPath(node->left, maxi);
+        int right = findPath(node->right, maxi);
+        
+        if(node->left == NULL) return right + node->data;
+        
+        if(node->right == NULL) return left + node->data;
+        
+        maxi = max(left + right + node->data, maxi);
+        
+        return max(left, right) + node->data;
+    }
+};
