@@ -1,0 +1,21 @@
+
+class Solution
+{
+    public:
+    //Function to check whether a Binary Tree is BST or not.
+    bool isValid(Node* root , long MINVAL , long MAXVAL)
+    {
+        if(root == NULL) return true;
+        
+        if(root->data >= MAXVAL || root->data <= MINVAL)
+          return false;
+          
+        return isValid(root->left , MINVAL , root->data) && isValid(root->right , root->data , MAXVAL);
+    }
+    
+    bool isBST(Node* root) 
+    {
+        // Your code here
+       return isValid(root , LONG_MIN , LONG_MAX);
+    }
+};
