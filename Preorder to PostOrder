@@ -1,0 +1,19 @@
+class Solution{
+public:
+    //Function that constructs BST from its preorder traversal.
+    Node* bst(int a,Node* root){
+        if(root==NULL)root=newNode(a);
+        else if(root->data >a)root->left=bst(a,root->left);
+        else if(root->data<a)root->right=bst(a,root->right);
+        return root;
+    }
+    Node* post_order(int pre[], int size)
+    {
+        //code here
+          Node*root;
+        for(int i=0;i<size;i++){
+            root=bst(pre[i],root);
+        }
+        return root;
+    }
+};
