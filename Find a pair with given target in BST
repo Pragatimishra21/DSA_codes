@@ -1,0 +1,39 @@
+
+class Solution{
+  public:
+    // root : the root Node of the given BST
+    // target : the target sum
+    int flag= 0;
+    unordered_map<int,int>H;
+    
+       bool check(struct Node *root, int target){
+
+        if(root == NULL) return false;
+
+        int x = check(root->left , target);
+
+        if(H.find(target - root->data ) != H.end()) {
+
+            flag = 1;
+
+            return true;
+
+        }
+
+        H[root->data];
+
+        int y = check(root->right, target);
+
+        if(flag == 1) return true;
+
+        return false;
+    }
+    
+    int isPairPresent(struct Node *root, int target)
+    {
+    //add code here.
+     if( check(root, target) ) return true;
+
+       return false;
+    }
+};
