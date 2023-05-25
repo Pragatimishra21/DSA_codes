@@ -1,0 +1,31 @@
+class Solution {
+public:
+   int flag = 0;
+   unordered_map<int , int> mpp;
+   bool check(TreeNode* root, int k)
+   {
+     if(root == NULL) return false;
+
+     check(root->left , k);
+
+     if(mpp.find(k - root->val) != mpp.end())
+     {
+         flag = 1;
+         return true;
+     }  
+
+     mpp[root->val];
+
+     check(root->right , k);
+
+     if(flag == 1) return true;
+     else
+     return false;
+   }
+
+   bool findTarget(TreeNode* root, int k) {
+        if(check(root , k)) return true;
+
+        return false;
+    }
+};
