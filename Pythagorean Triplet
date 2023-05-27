@@ -1,0 +1,21 @@
+class Solution{
+public:
+	// Function to check if the
+	// Pythagorean triplet exists or not
+	bool checkTriplet(int arr[], int n) {
+	    // code here
+	    unordered_map<int , int> m;
+	    for(int i=0 ; i<n ; i++)
+	     m.insert({arr[i]*arr[i] , i});
+	     
+	    for(int j=0 ; j<n ; j++)
+	    {
+	        for(int k=0 ; k<n ; k++)
+	        {
+	            if(m.find(arr[j]*arr[j] + arr[k]*arr[k]) != m.end())
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+};
