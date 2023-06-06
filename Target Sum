@@ -1,0 +1,36 @@
+class Solution {
+  public:
+   int solve(vector<int>& arr , int tar)
+   {
+       int n = arr.size();
+       vector<vector<int>> dp(n,vector<int>(tar+1 , 0));
+       
+       if(arr[0]==0) dp[0][0] = 2;
+       else dp[0][0] = 1;
+       
+       if(arr[0]!=0 && arr[0]<=tar) dp[0][arr[0]] = 1;
+       
+       for(int i=1 ; i<n ; i++)
+       {
+           for(int j=0 ; j<=tar ; j++)
+           {
+               int notpick = dp[i-1][j];
+               int pick = 0;
+               if(arr[i]<=j) pick = dp[i-1][j-arr[i]];
+               dp[i][j] = pick+notpick;
+               
+           }
+       }
+       return dp[n-1][tar];
+   }
+  
+    int findTargetSumWays(vector<int>&A ,int target) {
+        int totsum = 0;
+        for(int i=0 ; i<A.size() ; i++) 
+        totsum+= A[i];
+        
+        if(totsum-target<0 || (totsum-target)%2 != 0) return 0;
+        
+        return solve(A, (totsum-target)/2);
+    }
+};
