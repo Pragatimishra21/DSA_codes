@@ -1,0 +1,33 @@
+class Solution{
+public:
+    int maxLength(string S){
+        std::stack<int> bracketStack;
+        int max_len=0;
+        int current_len=0;
+        int last=-1;
+        for(int i=0;i<S.length();i++)
+        {
+            if(S[i]=='(')
+            {
+                bracketStack.push(i);
+            }
+            else
+            {
+                if(!bracketStack.empty())
+                {
+                    bracketStack.pop();
+                    if(!bracketStack.empty())
+                    current_len = i-bracketStack.top();
+                else
+                    current_len=i-last;
+                max_len = std::max(max_len,current_len);
+                }
+                else
+                {
+                    last = i;
+                }
+            }
+        }
+        return max_len;
+    }
+};
